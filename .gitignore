@@ -1,4 +1,5 @@
 *.png
+keys.js
 
 # Logs
 logs
@@ -58,4 +59,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
