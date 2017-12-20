@@ -1,6 +1,14 @@
 # trivia-search
 Trivia Search is a project that uses Google's Cloud Vision and Custom Search APIs to answer trivia questions.
 
+## Demo
+### Sample Question
+<img src='http://i.imgur.com/3z41Yud.png' title='Final Cut Question' width='' alt='Final Cut Question' />
+
+### Answer
+<img src='http://i.imgur.com/gziTtdR.gif' title='Final Cut Demo' width='' alt='Final Cut Demo' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Setup
 ### Google Cloud Vision
 1. Sign up for [Google Cloud](https://cloud.google.com/) to use Google's Cloud Vision API (you will need to enter your credit card information, but they promise not to bill you without confirming with you first)
@@ -13,7 +21,8 @@ Trivia Search is a project that uses Google's Cloud Vision and Custom Search API
 ### Custom Google Search Engine
 1. Create a `keys.js` file in the `trivia-search` directory
 2. Open the file and add the following code:
-```module.exports = {
+```
+module.exports = {
     API_KEY: 'PASTE_KEY_HERE',
     CUSTOM_SEARCH_ENGINE: 'PASTE_SEARCH_ENGINE_HERE'
 }
@@ -29,7 +38,7 @@ Trivia Search is a project that uses Google's Cloud Vision and Custom Search API
 11. Replace the `PASTE_KEY_HERE` text in `keys.js` with the Search engine ID
 12. On the [Custom Search JSON/Atom API page](https://developers.google.com/custom-search/json-api/v1/overview), scroll to the 'API key section'
 13. Click 'Get a key' and select the Google Cloud project you created in the Google Cloud Vision setup section
-14. Replace the `PASTE_SEARCH_ENGINE_HERE` text in `keys.js` with the API key you just created 
+14. Replace the `PASTE_SEARCH_ENGINE_HERE` text in `keys.js` with the API key you just created
 
 ## Run
 ```
