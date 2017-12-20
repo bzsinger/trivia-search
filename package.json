@@ -9,6 +9,7 @@
   "author": "Benny Singer",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/vision": "^0.13.0"
+    "@google-cloud/vision": "^0.13.0",
+    "request": "^2.83.0"
   }
 }
