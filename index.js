@@ -29,6 +29,7 @@ client
             var responseString = JSON.stringify(response);
 
             var answerNums = [];
+            // To avoid a div. by 0 error
             var totalCount = 1;
             for (i = 0; i < answers.length; i++) {
               var numOccur = 0;

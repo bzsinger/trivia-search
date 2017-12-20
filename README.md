@@ -1,12 +1,13 @@
 # trivia-search
 Trivia Search is a project that uses Google's Cloud Vision and Custom Search APIs to answer trivia questions.
 
-## Demo
-### Sample Question
-<img src='http://i.imgur.com/3z41Yud.png' title='Final Cut Question' width='' alt='Final Cut Question' />
+Inspired by [Toby Mellor](https://medium.com/@tobymellor/hq-trivia-using-bots-to-win-money-from-online-game-shows-ce2a1b11828b).
 
-### Answer
-<img src='http://i.imgur.com/gziTtdR.gif' title='Final Cut Demo' width='' alt='Final Cut Demo' />
+>NOTE: This violates HQ Trivia’s Terms of Service if used in a live game. Therefore I have never used this during a live game and the above proof-of-concept demonstration is performed on a previous recorded game found on YouTube. I don’t condone the use of a bot in a live game.
+>>You shall not (directly or indirectly): […] (v) use manual or automated software, devices, or other processes to “crawl” or “spider” any page of the App; (vi) harvest or scrape any Content from the Services;"
+
+## Demo
+<img src='http://i.imgur.com/zq8NOeq.gif' title='Final Cut Question' width='' alt='Final Cut Question'/>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Setup
@@ -32,7 +33,7 @@ module.exports = {
 5. Name your search engine (or leave it as 'Example')
 6. Click on 'Custom Search Engine' to navigate back to the homepage
 7. Click on your new search engine's name
-8. Under 'Sites to Search', click the box next to 'www.example.com' and click the 'Delete' button above. Confirm the deletion by pressing 'OK'
+8. Under 'Sites to Search', click the box next to 'www.example.com' and click the 'Delete' button. Confirm the deletion by pressing 'OK'
 9. Scroll to the bottom of the page and click 'Update'
 10. Scroll back up and click 'Search engine ID' in the details section
 11. Replace the `PASTE_KEY_HERE` text in `keys.js` with the Search engine ID
@@ -45,5 +46,10 @@ module.exports = {
 git clone git@github.com:bzsinger/trivia-search.git
 cd trivia-search
 npm install
-node index.js /PATH/TO/[filename].png
+./run-trivia.sh
 ```
+(Ctrl-C to exit)
+```
+./reset.sh
+```
+WARNING: ```run-trivia.sh``` will redirect your screenshots to the trivia-search test folder and silence stderr. Make sure to run ```reset.sh``` after you finish playing.
