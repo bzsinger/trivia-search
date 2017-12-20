@@ -12,12 +12,12 @@ Inspired by [Toby Mellor](https://medium.com/@tobymellor/hq-trivia-using-bots-to
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Setup
 ### Google Cloud Vision
-1. Sign up for [Google Cloud](https://cloud.google.com/) to use Google's Cloud Vision API (you will need to enter your credit card information, but they promise not to bill you without confirming with you first)
-2. Within your [Google Cloud dashboard](https://console.cloud.google.com/home/dashboard), create a new project.
+1. Sign up for [Google Cloud](https://cloud.google.com/) to use Google's Cloud Vision API
+2. Within your [Google Cloud dashboard](https://console.cloud.google.com/home/dashboard), create a new project
 3. Download the [Google Cloud SDK](https://cloud.google.com/sdk/downloads#versioned)
 4. Unzip and `cd` into the `google-cloud-sdk` directory. Run `./install.sh`
-5. When prompted to 'Modify profile to update your $PATH and enable shell command completion?', respond 'Y' or press enter
-6. In a new Terminal window, run `gcloud init`
+5. When prompted to 'Modify profile to update your $PATH and enable shell command completion?', respond 'Y' and press enter
+6. In a new Terminal window, run `gcloud init` in the `google-cloud-sdk` folder
 
 ### Custom Google Search Engine
 1. Create a `keys.js` file in the `trivia-search` directory
@@ -30,16 +30,15 @@ module.exports = {
 ```
 3. On the [Google CSE page](https://cse.google.com/cse/all), create a new search engine by clicking 'Add'
 4. Enter 'www.example.com' under 'Sites to Search'
-5. Name your search engine (or leave it as 'Example')
-6. Click on 'Custom Search Engine' to navigate back to the homepage
-7. Click on your new search engine's name
-8. Under 'Sites to Search', click the box next to 'www.example.com' and click the 'Delete' button. Confirm the deletion by pressing 'OK'
-9. Scroll to the bottom of the page and click 'Update'
-10. Scroll back up and click 'Search engine ID' in the details section
-11. Replace the `PASTE_KEY_HERE` text in `keys.js` with the Search engine ID
-12. On the [Custom Search JSON/Atom API page](https://developers.google.com/custom-search/json-api/v1/overview), scroll to the 'API key section'
-13. Click 'Get a key' and select the Google Cloud project you created in the Google Cloud Vision setup section
-14. Replace the `PASTE_SEARCH_ENGINE_HERE` text in `keys.js` with the API key you just created
+5. Click on 'Custom Search Engine' to navigate back to the homepage
+6. Click on your new search engine's name
+7. Under 'Sites to Search', click the box next to 'www.example.com' and then click the 'Delete' button. Confirm the deletion by pressing 'OK'
+8. Scroll to the bottom of the page and click 'Update'
+9. Scroll back up and click 'Search engine ID' in the details section
+10. Replace the `PASTE_KEY_HERE` text in `keys.js` with the Search engine ID
+11. On the [Custom Search JSON/Atom API page](https://developers.google.com/custom-search/json-api/v1/overview), scroll to the 'API key section'
+12. Click 'Get a key' and select the Google Cloud project you created earlier
+13. Replace the `PASTE_SEARCH_ENGINE_HERE` text in `keys.js` with the API key you just created
 
 ## Run
 ```
@@ -52,4 +51,4 @@ npm install
 ```
 ./reset.sh
 ```
-WARNING: ```run-trivia.sh``` will redirect your screenshots to the trivia-search test folder and silence stderr. Make sure to run ```reset.sh``` after you finish playing.
+WARNING: ```run-trivia.sh``` will redirect your screenshots to the ```trivia-search/test``` folder and silence stderr. Make sure to run ```reset.sh``` after you finish playing.
