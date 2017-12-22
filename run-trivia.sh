@@ -1,5 +1,22 @@
-defaults write com.apple.screencapture location ~/Desktop/trivia-search/test
+defaults write com.apple.screencapture location $PWD/test
 killall SystemUIServer
+
+control_c()
+# run if user hits control-c
+{
+  echo "Cleaning up..."
+  exec 3>&2
+  exec 2> /dev/null
+  exec 2>&3
+  defaults write com.apple.screencapture location ~/Desktop
+  killall SystemUIServer
+  echo "Done"
+  exit $?
+}
+
+# trap keyboard interrupt (control-c)
+trap control_c SIGINT
+
 while true
 do
   exec 3>&2

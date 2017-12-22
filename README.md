@@ -48,7 +48,3 @@ npm install
 ./run-trivia.sh
 ```
 (Ctrl-C to exit)
-```
-./reset.sh
-```
-WARNING: ```run-trivia.sh``` will redirect your screenshots to the ```trivia-search/test``` folder and silence stderr. Make sure to run ```reset.sh``` after you finish playing.
