@@ -13,8 +13,10 @@ var fullText;
 client
   .textDetection(fileName)
   .then(results => {
+
     const detections = results[0].textAnnotations;
     fullText = detections[0]['description'];
+
     var question = getQuestion(fullText);
     var answers = getAnswers(fullText);
 
@@ -29,26 +31,57 @@ client
             var responseString = JSON.stringify(response);
 
             var answerNums = [];
+
             // To avoid a div. by 0 error
             var totalCount = 1;
             for (i = 0; i < answers.length; i++) {
               var numOccur = 0;
-              var answerBits = answers[i].split(' ');
-              for (j = 0; j < answerBits.length; j++) {
-                numOccur += occurrences(responseString, answerBits[j], false);
-              }
+              numOccur += occurrences(responseString, answers[i], false);
 
               answerNums.push(numOccur);
               totalCount += numOccur;
-
             }
 
+            // Only split up answer into bits if only found 9 total instances of
+            // all answers
+            if (totalCount <= 10) {
+              totalCount = 1;
+              answerNums = []
+
+              for (i = 0; i < answers.length; i++) {
+                var numOccur = 0;
+
+                var answerBits = answers[i].split(' ');
+                for (j = 0; j < answerBits.length; j++) {
+                  if (answerBits[j] !== "the") {
+                    numOccur += occurrences(responseString, answerBits[j], false);
+                  }
+                }
+
+                answerNums.push(numOccur);
+                totalCount += numOccur;
+              }
+              console.log("CAUTION: Using answer bits");
+            }
+
+
             var bestPct = 0;
-            answerPcts = []
+            var max = true;
+            if (occurrences(question, "not", false) !== 0 || occurrences(question, "never", false) !== 0) {
+              console.log("WARNING: NOT/NEVER QUESTION")
+              max = false;
+              bestPct = 1;
+            }
+
+            answerPcts = [];
             for (i = 0; i < answerNums.length; i++) {
               var score = answerNums[i] / totalCount;
               answerPcts.push(score)
-              bestPct = Math.max(bestPct, score);
+              if (max) {
+                bestPct = Math.max(bestPct, score);
+              } else {
+                bestPct = Math.min(bestPct, score);
+              }
             }
 
             for (i = 0; i < answers.length; i++) {
@@ -71,12 +104,36 @@ client
     console.error('ERROR:', err);
   });
 
+function getQuestionEndingIndex(text) {
+  var end = text.indexOf('?');
+  if (end < 0) {
+    end = text.indexOf(':');
+  }
+  return end;
+}
+
 function getQuestion(text) {
-  return text.substring(0, text.indexOf('?')).replace('\n', ' ');
+  // If question ends with colon instead of question mark (like some The Q
+  // questions), use ':' as the end of the question
+  var questionEnd = getQuestionEndingIndex(text);
+
+  // Replace all whitespace in question with single spaces
+  return text.substring(0, questionEnd).replace('/\s/g', ' ');
 }
 
 function getAnswers(text) {
-  return text.substring(text.indexOf('?') + 1).trim().split('\n');
+  // Get the three answers by splitting on newline
+  var questionEnd = getQuestionEndingIndex(text);
+
+  var answers = text.substring(questionEnd + 1).trim().split('\n');
+
+  // Replace all alphanumeric characters with spaces
+  for (i = 0; i < answers.length; i++) {
+    answers[i] = answers[i].replace('/[^A-Za-z0-9]/', ' ');
+    //.replace(new RegExp('(the)', 'gi'), ' ')
+  }
+
+  return answers
 }
 
 function occurrences(paramString, paramSubString, allowOverlapping) {
