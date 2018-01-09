@@ -118,9 +118,8 @@ function getQuestion(text) {
   // If question ends with colon instead of question mark (like some The Q
   // questions), use ':' as the end of the question
   var questionEnd = getQuestionEndingIndex(text);
-
   // Replace all whitespace in question with single spaces
-  return text.substring(0, questionEnd).replace('/\s/g', ' ');
+  return text.substring(0, questionEnd).replace(/[\s]/g, ' ');
 }
 
 function getAnswers(text) {
