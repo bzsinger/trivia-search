@@ -4,7 +4,7 @@ killall SystemUIServer
 control_c()
 # run if user hits control-c
 {
-  echo "Cleaning up..."
+  printf "\nCleaning up...\n"
   exec 3>&2
   exec 2> /dev/null
   exec 2>&3
