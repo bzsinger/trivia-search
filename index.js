@@ -35,7 +35,7 @@ client
             // To avoid a div. by 0 error
             var totalCount = 1;
 
-            var sanitizedAnswers = sanitizeAnswers(answers)
+            var sanitizedAnswers = sanitizeAnswers(answers);
             for (i = 0; i < sanitizedAnswers.length; i++) {
               var numOccur = 0;
               numOccur += occurrences(responseString, answers[i], false);
@@ -136,7 +136,8 @@ function sanitizeAnswers(answers) {
   var sanitizedAnswers = []
   // Replace all alphanumeric characters with spaces
   for (i = 0; i < answers.length; i++) {
-    sanitizedAnswers.push(answers[i].replace(/\W+/g, " "));
+    sanitizedAnswers.push(answers[i].replace(/[^A-Za-z0-9'-*\s]/g, '')
+      .replace(/[\s]/g, ' '))
   }
   return sanitizedAnswers;
 }
