@@ -34,7 +34,9 @@ client
 
             // To avoid a div. by 0 error
             var totalCount = 1;
-            for (i = 0; i < answers.length; i++) {
+
+            var sanitizedAnswers = sanitizeAnswers(answers)
+            for (i = 0; i < sanitizedAnswers.length; i++) {
               var numOccur = 0;
               numOccur += occurrences(responseString, answers[i], false);
 
@@ -48,10 +50,10 @@ client
               totalCount = 1;
               answerNums = []
 
-              for (i = 0; i < answers.length; i++) {
+              for (i = 0; i < sanitizedAnswers.length; i++) {
                 var numOccur = 0;
 
-                var answerBits = answers[i].split(' ');
+                var answerBits = sanitizedAnswers[i].split(' ');
                 for (j = 0; j < answerBits.length; j++) {
                   if (answerBits[j] !== "the") {
                     numOccur += occurrences(responseString, answerBits[j], false);
@@ -127,13 +129,16 @@ function getAnswers(text) {
 
   var answers = text.substring(questionEnd + 1).trim().split('\n');
 
+  return answers;
+}
+
+function sanitizeAnswers(answers) {
+  var sanitizedAnswers = []
   // Replace all alphanumeric characters with spaces
   for (i = 0; i < answers.length; i++) {
-    answers[i] = answers[i].replace('/[^A-Za-z0-9]/', ' ');
-    //.replace(new RegExp('(the)', 'gi'), ' ')
+    sanitizedAnswers.push(answers[i].replace(/\W+/g, " "));
   }
-
-  return answers
+  return sanitizedAnswers;
 }
 
 function occurrences(paramString, paramSubString, allowOverlapping) {
