@@ -1,8 +1,8 @@
 const vision = require('@google-cloud/vision');
-const questionType = require('./question-type.js');
-const standardQuestion = require('./standard-question.js');
-const theseQuestion = require('./these-question.js');
-const extractQA = require('./extract-qa.js')
+const questionType = require('./helper-modules/question-type.js');
+const standardQuestion = require('./helper-modules/standard-question.js');
+const theseQuestion = require('./helper-modules/these-question.js');
+const extractQA = require('./helper-modules/extract-qa.js')
 
 // Creates a client
 const client = new vision.ImageAnnotatorClient();

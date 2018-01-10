@@ -1,4 +1,4 @@
-const keys = require('./keys.js');
+const keys = require('../keys.js');
 const getResults = require('./get-results.js')
 const request = require('request');
 

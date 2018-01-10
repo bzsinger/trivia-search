@@ -1,6 +1,6 @@
 {
   "name": "trivia-search",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "find trivia answers using Google's vision and search APIs",
   "main": "index.js",
   "scripts": {

@@ -48,3 +48,22 @@ npm install
 ./run-trivia.sh
 ```
 (Ctrl-C to exit)
+
+## Repository Structure
+```
+|- helper-modules
+|--- extract-qa.js - extracts question and answers from given text
+|--- get-results.js - parses given search results
+|--- print-results.js - prints results to the console in a human-readable format
+|--- question-type.js - quick functions for categorizing a question (standard, these, negative)
+|--- search.js - conducts a Google search for given text and returns a parsing of the results
+|--- standard-question.js - protocol for handling a standard question
+|--- these-question.js - protocol for handling a question that contains 'these' or 'the following'
+|- test - landing folder for screenshots
+|- test-completed - created by run script, stores screenshots post-parsing
+|- index.js - conducts OCR and passes text along to search
+|- keys.js - stores keys for search
+|- package.json - project meta-information
+|- README.md - you're here
+|- run-trivia.sh - a script to easily run this project
+```
