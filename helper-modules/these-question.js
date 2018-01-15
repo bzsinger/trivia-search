@@ -9,7 +9,7 @@ function theseQuestion(question, answers, negative) {
   var clue = getClue(question);
 
   var totals = [];
-
+  
   search(answers[0], [clue], false, function(results) {
       totals.push(results[0]);
       search(answers[1], [clue], false, function(results) {
@@ -35,19 +35,23 @@ function removeFront(question) {
   }
 
   for (i = 0; i < verbs.length; i++) {
-    if (question.substring(0, verbs[i].length) === verbs[i]) {
+    if (beginsWith(question, verbs[i])) {
       question = question.substring(verbs[i].length).trim();
       break;
     }
   }
 
   for (i = 0; i < articles.length; i++) {
-    if (question.substring(0, articles[i].length) === articles[i]) {
+    if (beginsWith(question, articles[i])) {
       question = question.substring(articles[i].length).trim();
       break;
     }
   }
   return question;
+}
+
+function beginsWith(question, word) {
+  return question.substring(0, word.length + 1) === (word + ' ');
 }
 
 const verbs = ['is', 'has', 'was', 'had'];
