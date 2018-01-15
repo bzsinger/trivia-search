@@ -25,6 +25,8 @@ do
   for filename in ./test/*.png; do
       node index.js "$filename"
       mv "$filename" test-completed/
+      say -v Alex -f "./answer.txt" -r 250
+      rm "./answer.txt"
   done
   exec 2>&3
 done
