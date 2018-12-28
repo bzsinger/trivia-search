@@ -9,7 +9,7 @@ function theseQuestion(question, answers, negative) {
   var clue = getClue(question);
 
   var totals = [];
-  
+
   search(answers[0], [clue], false, function(results) {
       totals.push(results[0]);
       search(answers[1], [clue], false, function(results) {
@@ -23,13 +23,15 @@ function theseQuestion(question, answers, negative) {
 }
 
 function getClue(question) {
-  return removeFront(question.trim());
+  return removeFront(question.trim().toLowerCase()).trim();
 }
 
 function removeFront(question) {
   var theseIndex = question.indexOf('these');
-  if (theseIndex === question.length - 5) {
-    question = question.substring(0, theseIndex)
+  if (beginsWith(question, 'which is')) {
+    question = question.substring(9);
+  } else if (theseIndex === question.length - 5) {
+    question = question.substring(0, theseIndex);
   } else {
     question = question.substring(theseIndex + 5).trim();
   }
@@ -47,6 +49,7 @@ function removeFront(question) {
       break;
     }
   }
+
   return question;
 }
 
@@ -56,3 +59,4 @@ function beginsWith(question, word) {
 
 const verbs = ['is', 'has', 'was', 'had'];
 const articles = ['the', 'a', 'an'];
+const trivial = ['with', 'of', 'a', 'an'];
