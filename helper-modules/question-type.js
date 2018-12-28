@@ -7,22 +7,28 @@ function standard(question) {
 }
 
 function these(question) {
-  question = question.toLowerCase();
-  return question.indexOf('these') >= 0
-    || question.indexOf('the following') >= 0;
+  question = question.trim().toLowerCase();
+  return question.indexOf(' these ') >= 0
+    || question.indexOf(' the following ') >= 0
+    || question.indexOf(' which is ') == 0;
 }
 
 function negative(question) {
   question = question.toLowerCase();
-  return not(question) || never(question);
+  return not(question) || never(question) || except(question);
 }
 
 function not(question) {
   question = question.toLowerCase();
-  return question.indexOf('not') >= 0;
+  return question.indexOf(' not ') >= 0;
 }
 
 function never(question) {
   question = question.toLowerCase();
-  return question.indexOf('never') >= 0;
+  return question.indexOf(' never ') >= 0;
+}
+
+function except(question) {
+  question = question.toLowerCase();
+  return question.indexOf(' except ') >= 0;
 }

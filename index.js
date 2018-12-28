@@ -9,18 +9,28 @@ const client = new vision.ImageAnnotatorClient();
 
 const fileName = process.argv[2];
 
-var fullText;
 // Performs text detection on the local file
 client
   .textDetection(fileName)
   .then(results => {
-
     const detections = results[0].textAnnotations;
-    fullText = detections[0]['description'];
+    var fullText = detections[0]['description'];
 
     var dict = extractQA(fullText);
     var question = dict['question'];
     var answers = dict['answers'];
+
+    if (question.trim().length == 0) {
+      questionArray = answers.slice(0, answers.length - 3)
+      answers = answers.slice(answers.length - 3, answers.length)
+
+      question = ""
+      for (var i = 0; i < questionArray.length; i++) {
+        question += questionArray[i]
+      }
+
+      console.log("WARNING: Difficulty parsing question")
+    }
 
     console.log('Question: ' + question);
     console.log('Answers: ' + answers);

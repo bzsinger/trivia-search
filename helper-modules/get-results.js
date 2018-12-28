@@ -1,5 +1,7 @@
 module.exports = exports = getResults;
 
+const trivialWords = ['the', 'a', 'and', 'prize for this question']
+
 function getResults(responseString, answers, printAnswerBits) {
   var answerNums = [];
 
@@ -9,12 +11,12 @@ function getResults(responseString, answers, printAnswerBits) {
   var sanitizedAnswers = sanitizeAnswers(answers);
   for (i = 0; i < sanitizedAnswers.length; i++) {
     var numOccur = 0;
-    numOccur += occurrences(responseString, answers[i], false);
+
+    numOccur += occurrences(responseString, sanitizedAnswers[i], false);
 
     answerNums.push(numOccur);
     totalCount += numOccur;
   }
-
   // Only split up answer into bits if only found 9 total instances of
   // all answers
   if (totalCount <= 10) {
@@ -40,10 +42,14 @@ function getResults(responseString, answers, printAnswerBits) {
 
 function sanitizeAnswers(answers) {
   var sanitizedAnswers = []
-  // Replace all alphanumeric characters with spaces
   for (i = 0; i < answers.length; i++) {
+    // Remove all non-alphanumeric characters
     sanitizedAnswers.push(answers[i].replace(/[^A-Za-z0-9'-*\s]/g, '')
-    .replace(/[\s]/g, ' '))
+                                    .replace(/[\s]/g, ' '));
+    // Remove all trivial words
+    for (j = 0; j < trivialWords.length; j++) {
+      sanitizedAnswers[i] = sanitizedAnswers[i].replace(' ' + trivialWords[j] + ' ', ' ');
+    }
   }
   return sanitizedAnswers;
 }
@@ -68,5 +74,3 @@ function occurrences(paramString, paramSubString, allowOverlapping) {
   }
   return n;
 }
-
-const trivialWords = ['the', 'a']

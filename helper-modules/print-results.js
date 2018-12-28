@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = exports = printResults;
 
 function printResults(answerNums, answers, negative) {
@@ -25,13 +27,29 @@ function printResults(answerNums, answers, negative) {
     }
   }
 
+  var tldr = '';
+  var answerString = '';
+  var guess = false;
   for (i = 0; i < answers.length; i++) {
     var score = (answerPcts[i] * 100).toFixed(2)
     if (answerPcts[i] === bestPct) {
-      console.log(answers[i] + ': ' + score + '% (best answer)')
+      answerString += (i+1) + ': ' + answers[i] + ': ' + score + '% (best answer)\n'
+      if (tldr.length > 0) {
+        tldr += ', ' + (i+1);
+        if (!guess) {
+          tldr = 'Guess: ' + tldr;
+          guess = true;
+        }
+      } else {
+        tldr += (i+1);
+      }
     } else {
-      console.log(answers[i] + ': ' + score + '%')
+      answerString += (i+1) + ': ' + answers[i] + ': ' + score + '%\n'
     }
   }
+  console.log(answerString);
+  console.log('Answer: ' + tldr);
   console.log();
+
+  fs.writeFileSync("answer.txt", tldr.replace(/[^A-Za-z0-9\s]/g, ''));
 }

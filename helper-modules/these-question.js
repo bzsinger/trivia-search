@@ -23,32 +23,40 @@ function theseQuestion(question, answers, negative) {
 }
 
 function getClue(question) {
-  return removeFront(question.trim());
+  return removeFront(question.trim().toLowerCase()).trim();
 }
 
 function removeFront(question) {
   var theseIndex = question.indexOf('these');
-  if (theseIndex === question.length - 5) {
-    question = question.substring(0, theseIndex)
+  if (beginsWith(question, 'which is')) {
+    question = question.substring(9);
+  } else if (theseIndex === question.length - 5) {
+    question = question.substring(0, theseIndex);
   } else {
     question = question.substring(theseIndex + 5).trim();
   }
 
   for (i = 0; i < verbs.length; i++) {
-    if (question.substring(0, verbs[i].length) === verbs[i]) {
+    if (beginsWith(question, verbs[i])) {
       question = question.substring(verbs[i].length).trim();
       break;
     }
   }
 
   for (i = 0; i < articles.length; i++) {
-    if (question.substring(0, articles[i].length) === articles[i]) {
+    if (beginsWith(question, articles[i])) {
       question = question.substring(articles[i].length).trim();
       break;
     }
   }
+
   return question;
+}
+
+function beginsWith(question, word) {
+  return question.substring(0, word.length + 1) === (word + ' ');
 }
 
 const verbs = ['is', 'has', 'was', 'had'];
 const articles = ['the', 'a', 'an'];
+const trivial = ['with', 'of', 'a', 'an'];
