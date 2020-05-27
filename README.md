@@ -10,7 +10,7 @@ Inspired by [Toby Mellor](https://medium.com/@tobymellor/hq-trivia-using-bots-to
 <img src='http://i.imgur.com/zq8NOeq.gif' title='Final Cut Question' width='' alt='Final Cut Question'/>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
-## Setup
+## Setup (Mac)
 ### Clone the Project
 * `git clone git@github.com:bzsinger/trivia-search.git`
 
@@ -60,12 +60,18 @@ module.exports = {
 3. Name the billing account and click 'Continue'
 4. Complete the billing profile and click 'Submit and enable billing'
 
+### Optional: Remove Mac Screenshot Thumbnail
+* Waiting for Mac screenshot thumbnail may delay your results. Disable it by following the instructions [here](https://osxdaily.com/2019/08/02/disable-screenshot-thumbnail-preview-mac/).
+
 ## Run
 ```
 cd trivia-search
 npm install
 ./run-trivia.sh
 ```
+
+Take screenshots of trivia questions and answers (see example above)
+
 (Ctrl-C to exit)
 
 ## Repository Structure
